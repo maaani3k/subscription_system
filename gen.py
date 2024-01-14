@@ -27,9 +27,12 @@ if __name__ == "__main__":
     
     # Dictionary mapping phone numbers to initial amounts
     phone_amount_mapping = {
-        '+48123456789': 0.00,
-        '+48123456780': 7.00,
-        '+48123456781': 90.00
+        #'+48505926878': 0.00,  #Misialenta
+        #'+48534181076': 11.00, #ja
+        #'+48880574277': 0.00,  #Srakamai
+	#'+48531661191': 0.00,  #Mateusz
+	#'+48519718970': 21.12, #Olczi
+	'+48660695355': 21.12  #Lysy
     }
 
     # Generate debtor.txt for the current month

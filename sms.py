@@ -34,12 +34,10 @@ def build_xml_request(phone_number, amount):
     sca_element.text = ''
 
     # Format the Content as "Witaj w systemie ... należność: *number*zł"
-    content_template = '''
-        Witaj w systemie powiadomień, dostaniesz info o odnowieniu subskrybcji lub zaległej płatności
-        serwis: Youtube Premium
-        status: odnowiona do 17.01.2024r
-        należność: {}zł
-    '''
+    content_template = '''Witaj w systemie powiadomień, dostaniesz info o odnowieniu subskrybcji lub zaległej płatności
+serwis: Youtube Premium
+status: odnowiona do 17.01.2024r
+należność: {}zł'''
     content = content_template.format(amount)
 
     # Add Content element
