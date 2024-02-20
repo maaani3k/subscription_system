@@ -1,9 +1,15 @@
+import time
 import sys
 import requests
 import xml.dom.minidom
 from xml.etree import ElementTree as ET
 from xml.etree.ElementTree import Element, SubElement, tostring
 from datetime import datetime
+
+# ANSI escape codes for color
+GREEN = '\033[92m'
+RED = '\033[91m'
+RESET = '\033[0m'
 
 def get_request_verification_token(api_url):
     try:
@@ -36,7 +42,7 @@ def build_xml_request(phone_number, amount):
     # Format the Content as "Witaj w systemie ... należność: *number*zł"
     content_template = '''Witaj w systemie powiadomień, dostaniesz info o odnowieniu subskrybcji lub zaległej płatności
 serwis: Youtube Premium
-status: odnowiona do 17.01.2024r
+status: odnowiona do 17.03.2024r
 należność: {}zł'''
     content = content_template.format(amount)
 
@@ -143,6 +149,13 @@ if __name__ == "__main__":
         result = send_sms(sms_api_url, xml_data, token)
 
         if result is not None:
-            print(f"SMS Response for {phone_number}: {result}")
+            if "<response>OK</response>" in result:
+                print(f"{GREEN}SMS Response for {phone_number}: {result}{RESET}")
+            elif "<error>" in result:
+                print(f"{RED}SMS Response for {phone_number}: {result}{RESET}")
+            else:
+                print(f"Unknown response for {phone_number}: {result}")
         else:
-            print(f"Failed to send SMS for {phone_number}. Check debug messages for details.")
+            print(f"{RED}Failed to send SMS for {phone_number}. Check debug messages for details.{RESET}")
+
+        time.sleep(10)  # Introduce a 10-second delay between SMS sends
